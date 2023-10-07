@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study report app</title>
+
+    <style>
+
+/* Reset some default styles for better consistency */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Style the form container */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fd8433;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #cae91b;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Style form labels and input elements */
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+input[type="datetime-local"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #5b1af1;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+/* Style the submit button */
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+date{
+    width: 100%;
+}
+.copyright{
+    margin-top: 15px;
+    margin-left: 10px;
+}
+#msg{
+    color:#20a309;
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    margin-left: 10px;
+    margin-top: 15px;
+    
+}
+.messagebox{
+    display: flex;
+    flex-wrap: wrap;
+   
+
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    form {
+        padding: 10px 10px;
+    }
+}
+</style>
+</head>
+<body>
+ 
+ 
+<div class="outerbox">
+    <h2>DAILY STUDY REPORTS <br>(Deepak Sharma)<br>Fill Honestly..</h2>
+    <form name="submit-to-google-sheet">
+        <label for="date">Date:</label>
+        <input type="datetime-local" name="Date" required><br><br>
+
+        <label for="message1">English Report:</label>
+        <textarea name="English Report" rows="4" cols="50" placeholder=" Write English Report" required></textarea><br><br>
+
+        <label for="message2">GS Report:</label>
+        <textarea name="GS Report" rows="4" cols="50" placeholder=" Write GS Report" required></textarea><br><br>
+
+        <label for="message3">GK Report:</label>
+        <textarea name="GK Report" rows="4" cols="50" placeholder="Write GK Report" required></textarea><br><br>
+
+        <label for="message4">Maths Report:</label>
+        <textarea name="Maths Report" rows="4" cols="50" placeholder="Write Maths Report" required></textarea><br><br>
+
+        <label for="message5">Reasoning Report:</label>
+        <textarea name="Reasoning Report" rows="4" cols="50" placeholder="Write Reasoning Report" required></textarea><br><br>
+
+        <label for="message6">Computer Report:</label>
+        <textarea name="Computer Report" rows="4" cols="50" placeholder="Write Computer Report" required></textarea><br><br>
+        <div class="messagebox">
+            <input type="submit" value="Submit">
+            <span id="msg"></span>
+        </div>
+        <div class="copyright"> 
+            <p> 2023 &copy; DEEPAK.. All rights reserved. Made By Deepak Sharma.</p>
+        </div>
+    </form>
+   
+</div>
+
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzyzgtWBRo2W9jgUkd1iALakLNmflP7siG_mNweusYjxBtdMM2zRCVTELb6rFyio-IWog/exec'
+    const form = document.forms['submit-to-google-sheet']
+    const msg = document.getElementById("msg")
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response =>{
+
+            msg.innerHTML = 'Submitted successfully.'
+            setTimeout(function(){
+                msg.innerHTML = ""
+            },5000)
+            form.reset()
+        })
+        .catch(error => console.error('Error!', error.message))
+    })
+
+    
+  </script>
+   
+  
+</body>
+</html>
